@@ -2,7 +2,7 @@ import { Alchemy, Network } from "alchemy-sdk";
 import { ethers } from "ethers";
 import { FC, useEffect, useState } from "react";
 
-import { useAppDispatch, useWeb3Tools } from "../hooks";
+import { useAppDispatch } from "../hooks";
 import { IWrapped } from "../interfaces";
 
 import { updateAccount } from "../redux/slices/account.reducer";
@@ -36,6 +36,14 @@ export const withProvider = (WrappedComponent: FC<IWrapped>) => {
       setAlchemy(alchemy);
     }, []);
 
+    useEffect(() => {
+      (async () => {
+        if (!provider) return;
+        console.log("There is a provider!");
+        const [account] = await provider.send("eth_requestAccounts", []);
+        dispatch(updateAccount(account));
+      })();
+    }, [provider]);
     return (
       <WrappedComponent {...props} provider={provider} alchemy={alchemy} />
     );
