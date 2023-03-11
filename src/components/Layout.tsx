@@ -1,4 +1,3 @@
-import { useAppSelector } from "../hooks";
 import Navbar from "./Navbar/";
 
 export default function ({ children }: any) {

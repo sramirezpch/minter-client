@@ -5,7 +5,6 @@ import NftAbi from "../src/abi/NFT.json";
 import contracts from "../src/contracts.json";
 
 import { IWrapped } from "../src/interfaces";
-import { useContracts } from "../src/hooks";
 import { withProvider } from "../src/hocs";
 import { ethers } from "ethers";
 import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
@@ -109,8 +108,9 @@ const MintPage: NextPage<IWrapped> = ({ provider }) => {
               <label htmlFor="description">Description</label>
             </span>
             <textarea
-              className="border-2 rounded-lg pl-1 pb-1 w-full"
+              className="border-2 rounded-lg pl-1 pb-1 w-full resize-none"
               rows={5}
+              placeholder="You can write here a brief description"
               name="description"
               id="description"
               onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
@@ -122,7 +122,10 @@ const MintPage: NextPage<IWrapped> = ({ provider }) => {
             ></textarea>
           </div>
           <input type="file" onChange={(e) => setFile(e.target.files![0])} />
-          <button onClick={mintNft} className="border-2 rounded-lg px-4 py-1">
+          <button
+            onClick={mintNft}
+            className="bg-blue-800 text-white rounded-lg px-4 py-1"
+          >
             Mint NFT
           </button>
         </form>
