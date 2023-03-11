@@ -7,11 +7,20 @@ import contracts from "../src/contracts.json";
 import { IWrapped } from "../src/interfaces";
 import { withProvider } from "../src/hocs";
 import { ethers } from "ethers";
-import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  MouseEvent,
+  useContext,
+  useState,
+} from "react";
 
-const MintPage: NextPage<IWrapped> = ({ provider }) => {
+import Web3Context from "../src/context/web3.context";
+
+const MintPage: NextPage<IWrapped> = () => {
   const [file, setFile] = useState<any>();
   const [formValues, setFormValues] = useState<any>({});
+  const provider = useContext(Web3Context);
 
   const seedFormData = (form: FormData) => {
     form.append("file", file);
