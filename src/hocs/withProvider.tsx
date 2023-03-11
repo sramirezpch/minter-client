@@ -1,17 +1,14 @@
-import { Alchemy, Network } from "alchemy-sdk";
-import { ethers } from "ethers";
 import { FC, useEffect, useState } from "react";
+import Web3Context from "../context/web3.context";
 
-import { useAppDispatch } from "../hooks";
+import { useAppDispatch, useWeb3Tools } from "../hooks";
 import { IWrapped } from "../interfaces";
 
 import { updateAccount } from "../redux/slices/account.reducer";
 
 export const withProvider = (WrappedComponent: FC<IWrapped>) => {
   const EnhancedComponent: FC = (props) => {
-    // const { provider, alchemy } = useWeb3Tools();
-    const [provider, setProvider] = useState<ethers.providers.Web3Provider>();
-    const [alchemy, setAlchemy] = useState<Alchemy>();
+    const { provider, alchemy } = useWeb3Tools();
 
     const dispatch = useAppDispatch();
 
@@ -26,17 +23,6 @@ export const withProvider = (WrappedComponent: FC<IWrapped>) => {
     }, []);
 
     useEffect(() => {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const alchemy = new Alchemy({
-        apiKey: process.env.ALCHEMY_API_KEY,
-        network: Network.ETH_GOERLI,
-      });
-
-      setProvider(provider);
-      setAlchemy(alchemy);
-    }, []);
-
-    useEffect(() => {
       (async () => {
         if (!provider) return;
         console.log("There is a provider!");
@@ -44,8 +30,11 @@ export const withProvider = (WrappedComponent: FC<IWrapped>) => {
         dispatch(updateAccount(account));
       })();
     }, [provider]);
+
     return (
-      <WrappedComponent {...props} provider={provider} alchemy={alchemy} />
+      <Web3Context.Provider value={provider}>
+        <WrappedComponent {...props} alchemy={alchemy} />
+      </Web3Context.Provider>
     );
   };
 
