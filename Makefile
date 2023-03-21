@@ -3,10 +3,10 @@ DOCKERFILE_PATH=./infra/Dockerfile
 COMPOSE_FILE=./docker-compose.yml
 
 build-image:
-	docker build -t nft-minter -f ./infra/.dockerfile . --no-cache
+	docker build -t $(IMAGE_NAME) -f $(DOCKERFILE_PATH) . --no-cache
 
 run-with-docker:
-	docker run -p 3000:3000 -d --name NftMinter nft-minter
+	docker run -p 3000:3000 -d --name nft-minter $(IMAGE_NAME)
 
 down:
 	docker-compose down --remove-orphans
@@ -14,7 +14,7 @@ down:
 .PHONY: run
 run:
 	make down
-	docker-compose --file $(DOCKER_COMPOSE) up -d --build
+	docker-compose --file $(COMPOSE_FILE) up -d --build
 	
 open-browser:
 ifeq ($(OS), Windows_NT)
