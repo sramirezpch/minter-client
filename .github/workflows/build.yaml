@@ -25,5 +25,7 @@ jobs:
       - name: Build Docker image
         run: make build-image
       - name: Tag Docker image
+        run: docker tag nft-minter sramirezpch/nft-minter
+      - name: Push Docker image to Docker Hub
         run: |
           docker push sramirezpch/nft-minter
