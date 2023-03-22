@@ -4,7 +4,6 @@ import axios from "axios";
 import NftAbi from "../src/abi/NFT.json";
 import contracts from "../src/contracts.json";
 
-import { IWrapped } from "../src/interfaces";
 import { withProvider } from "../src/hocs";
 import { ethers } from "ethers";
 import {
@@ -17,7 +16,7 @@ import {
 
 import Web3Context from "../src/context/web3.context";
 
-const MintPage: NextPage<IWrapped> = () => {
+const MintPage: NextPage = () => {
   const [file, setFile] = useState<any>();
   const [formValues, setFormValues] = useState<any>({});
   const provider = useContext(Web3Context);
