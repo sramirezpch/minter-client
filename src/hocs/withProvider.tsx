@@ -2,13 +2,12 @@ import { FC, useEffect, useState } from "react";
 import Web3Context from "../context/web3.context";
 
 import { useAppDispatch, useWeb3Tools } from "../hooks";
-import { IWrapped } from "../interfaces";
 
 import { updateAccount } from "../redux/slices/account.reducer";
 
-export const withProvider = (WrappedComponent: FC<IWrapped>) => {
+export const withProvider = (WrappedComponent: FC) => {
   const EnhancedComponent: FC = (props) => {
-    const { provider, alchemy } = useWeb3Tools();
+    const { provider } = useWeb3Tools();
 
     const dispatch = useAppDispatch();
 
@@ -33,7 +32,7 @@ export const withProvider = (WrappedComponent: FC<IWrapped>) => {
 
     return (
       <Web3Context.Provider value={provider}>
-        <WrappedComponent {...props} alchemy={alchemy} />
+        <WrappedComponent {...props} />
       </Web3Context.Provider>
     );
   };
