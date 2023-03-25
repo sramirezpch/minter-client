@@ -1,0 +1,14 @@
+version: '3'
+services:
+  nft-minter:
+    build:
+      context: .
+      dockerfile: ./infra/Dockerfile
+    expose:
+      - 80
+    networks:
+      - localhost
+    ports:
+      - 3000:80
+networks:
+  localhost: {}
