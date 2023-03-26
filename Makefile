@@ -6,7 +6,7 @@ build-image:
 	docker build -t $(IMAGE_NAME) -f $(DOCKERFILE_PATH) . --no-cache
 
 run-with-docker:
-	docker run -p 3000:80 --name nft-minter $(IMAGE_NAME)
+	docker run -p 3000:80 --name $(IMAGE_NAME) $(IMAGE_NAME)
 
 down:
 	docker-compose down --remove-orphans
@@ -14,6 +14,7 @@ down:
 .PHONY: run
 run:
 	make down
+	npm run build
 	docker-compose --file $(COMPOSE_FILE) up -d --build
 	
 open-browser:
