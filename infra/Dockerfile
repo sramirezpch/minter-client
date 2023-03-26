@@ -10,10 +10,8 @@ COPY . .
 
 RUN npm run build
 
-FROM nginx:alpine
+FROM node:alpine 
 
-RUN rm -rf /usr/share/nginx/html/*
+WORKDIR /app
 
-COPY --from=builder /app/build /usr/share/nginx/html/
-
-CMD ["nginx", "-g", "daemon off;"]
+COPY --from=builder /app/build ./
