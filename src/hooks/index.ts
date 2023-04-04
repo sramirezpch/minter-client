@@ -1,3 +1,3 @@
-import { useWeb3Tools } from "./useWeb3Tools.hooks";
-
-export { useWeb3Tools };
+export { useWeb3Tools } from "./useWeb3Tools.hooks";
+export { useAppDispatch } from "./useDispatch.hooks";
+export { useAppSelector } from "./useSelector.hooks";

@@ -5,7 +5,9 @@ import { Form } from "./components/Form";
 
 import Web3Context from "./context/web3.context";
 
-export const MintPage: React.FC = () => {
+import { withProvider } from "./hocs/withProvider";
+
+const App: React.FC = () => {
   const provider = useContext(Web3Context);
 
   return (
@@ -16,3 +18,5 @@ export const MintPage: React.FC = () => {
     </div>
   );
 };
+
+export const MintPage = withProvider(App);
