@@ -3,7 +3,7 @@ services:
   nft-minter:
     build:
       context: .
-      dockerfile: ./infra/Dockerfile-dev
+      dockerfile: ./infra/Dockerfile
     expose:
       - 80
     networks:
