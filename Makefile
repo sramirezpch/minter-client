@@ -4,7 +4,6 @@ DOCKERFILE_DEV_PATH=./infra/Dockerfile-dev
 COMPOSE_FILE=./docker-compose.yaml
 
 build-image:
-	npm run build
 	docker build -t $(IMAGE_NAME) -f $(DOCKERFILE_PATH) . --no-cache
 
 build-dev:
