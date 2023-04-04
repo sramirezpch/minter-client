@@ -1,16 +1,20 @@
 import { FC, useEffect, useState } from "react";
 import Web3Context from "../context/web3.context";
-import { useWeb3Tools } from "../hooks/";
+import { useAppDispatch, useWeb3Tools } from "../hooks/";
+import { update } from "../redux/slices/userWallet.slices";
 
 export const withProvider = (WrappedComponent: FC) => {
   const EnhancedComponent: FC = (props) => {
     const { provider } = useWeb3Tools();
 
+    const dispatch = useAppDispatch();
+
     useEffect(() => {
       global.window?.ethereum.on(
         "accountsChanged",
         (accounts: Array<string>) => {
-          console.log("Account changed!");
+          const [account] = accounts;
+          dispatch(update({ address: account }));
         }
       );
     }, []);
@@ -19,7 +23,7 @@ export const withProvider = (WrappedComponent: FC) => {
       (async () => {
         if (!provider) return;
         const [account] = await provider.send("eth_requestAccounts", []);
-        console.log(account);
+        dispatch(update({ address: account }));
       })();
     }, [provider]);
 

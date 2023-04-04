@@ -8,6 +8,8 @@ interface IButton {
 
 export const Button = ({ onClick, className = "", children }: IButton) => {
   return (
-    <button className={`rounded-lg px-4 py-1 ${className}`}>{children}</button>
+    <button className={`rounded-lg px-4 py-1 ${className}`} onClick={onClick}>
+      {children}
+    </button>
   );
 };

@@ -6,14 +6,19 @@ import reportWebVitals from "./reportWebVitals";
 import { MintPage } from "./App";
 import { Layout } from "./components/Layout";
 
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Layout>
-      <MintPage />
-    </Layout>
+    <Provider store={store}>
+      <Layout>
+        <MintPage />
+      </Layout>
+    </Provider>
   </React.StrictMode>
 );
 

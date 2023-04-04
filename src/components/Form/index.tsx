@@ -1,19 +1,26 @@
 import { ChangeEvent, FC, FormEvent, MouseEvent, useState } from "react";
 
-import { mint, pinFileToPinata, seedFormData } from "../../utils";
+import {
+  mint,
+  pinFileToPinata,
+  seedFormData,
+  isCorrectFileType,
+} from "../../utils";
 
 import { FormValues } from "../../interface";
 import { Input } from "../Input";
 import { Button } from "../Button";
+import { ErrorLabel } from "../ErrorLabel";
 
 export const Form: FC = () => {
-  const [formValues, setFormValues] = useState<FormValues>({});
+  const [formValues, setFormValues] = useState<Partial<FormValues>>({});
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value, files } = e.target as HTMLInputElement;
-
+    if (files) {
+    }
     setFormValues({ ...formValues, [name]: files ? files[0] : value });
   };
 
@@ -55,7 +62,12 @@ export const Form: FC = () => {
           onChange={handleInputChange}
         />
       </div>
-      <Input type="file" name="file" id="file" onChange={handleInputChange} />
+      <div>
+        <Input type="file" name="file" id="file" onChange={handleInputChange} />
+        {formValues.file && !isCorrectFileType(formValues.file.type) && (
+          <ErrorLabel errorMessage="Invalid file type" />
+        )}
+      </div>
       <Button className="bg-blue-800" onClick={handleSubmitForm}>
         <span className="text-white">Mint NFT</span>
       </Button>

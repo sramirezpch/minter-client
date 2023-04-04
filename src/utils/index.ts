@@ -2,7 +2,11 @@ import axios from "axios";
 
 import { FormValues } from "../interface";
 
-export const seedFormData = ({ title, description, file }: FormValues) => {
+export const seedFormData = ({
+  title,
+  description,
+  file,
+}: Partial<FormValues>) => {
   const form = new FormData();
   form.append("File:", file!);
 
@@ -49,4 +53,9 @@ export const mint = async (hash: string) => {
   //     console.log("Metadata unpinned successfully!");
   //   }
   // }
+};
+
+export const isCorrectFileType = (type: string) => {
+  const correctFileTypes = ["image/png", "image/jpg", "image/jpeg"];
+  return type in correctFileTypes;
 };
