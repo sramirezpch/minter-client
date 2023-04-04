@@ -5,7 +5,8 @@ on:
     types: [published]
 jobs:
   build-image:
-    runs-on: ubuntu-latest
+    name: Docker image building
+    runs-on: macOS-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
