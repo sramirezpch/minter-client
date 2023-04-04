@@ -1,12 +1,16 @@
 IMAGE_NAME=nft-minter
 DOCKERFILE_PATH=./infra/Dockerfile
+DOCKERFILE_DEV_PATH=./infra/Dockerfile-dev
 COMPOSE_FILE=./docker-compose.yaml
 
 build-image:
 	docker build -t $(IMAGE_NAME) -f $(DOCKERFILE_PATH) . --no-cache
 
+build-dev:
+	docker build -t $(IMAGE_NAME)-dev -f $(DOCKERFILE_DEV_PATH) . --no-cache
+	
 run-with-docker:
-	docker run -p 3000:80 --name $(IMAGE_NAME) $(IMAGE_NAME)
+	docker run -p 3000:80 --name $(IMAGE_NAME)-dev $(IMAGE_NAME)-dev
 
 down:
 	docker-compose down --remove-orphans
