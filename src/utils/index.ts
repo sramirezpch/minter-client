@@ -2,15 +2,11 @@ import axios from "axios";
 
 import { FormValues } from "../interface";
 
-export const seedFormData = ({
-  title,
-  description,
-  file,
-}: Partial<FormValues>) => {
+export const seedFormData = ({ title, description, file }: FormValues) => {
   const form = new FormData();
-  form.append("File:", file!);
+  form.append("File", file!);
 
-  form.append("Title:", title!);
+  form.append("Title", title!);
   form.append("Description", description!);
 
   return form;
@@ -57,5 +53,5 @@ export const mint = async (hash: string) => {
 
 export const isCorrectFileType = (type: string) => {
   const correctFileTypes = ["image/png", "image/jpg", "image/jpeg"];
-  return type in correctFileTypes;
+  return correctFileTypes.includes(type);
 };
