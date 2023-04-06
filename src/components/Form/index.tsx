@@ -19,8 +19,6 @@ export const Form: FC = () => {
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value, files } = e.target as HTMLInputElement;
-    if (files) {
-    }
     setFormValues({ ...formValues, [name]: files ? files[0] : value });
   };
 
@@ -29,7 +27,7 @@ export const Form: FC = () => {
   ) => {
     e.preventDefault();
 
-    const form = seedFormData(formValues);
+    const form = seedFormData(formValues as Required<FormValues>);
 
     const hash = await pinFileToPinata(form);
     if (hash) await mint(hash);

@@ -22,7 +22,12 @@ export const Input = ({
   switch (type) {
     case "textarea":
       return (
-        <TextArea placeholder={placeholder!} onChange={onChange} rows={rows} />
+        <TextArea
+          placeholder={placeholder!}
+          onChange={onChange}
+          name={name}
+          rows={rows}
+        />
       );
     case "text":
       return (
