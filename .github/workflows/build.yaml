@@ -1,11 +1,11 @@
-name: Docker Image CI
+name:
 
 on:
   release:
     types: [published]
 jobs:
   build-image:
-    name: Docker image building
+    name: Push docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
